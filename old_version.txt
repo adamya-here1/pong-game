@@ -1,0 +1,242 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>boing.io</title>
+    <script src="js/random-library.js"></script>
+    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="scoreboard">Player: 0 | AI: 0</div>
+    <div id="end-screen"></div>
+  </body>
+</html> -->
+
+// // Basic Setup
+// let canvas = document.getElementById("canvas");
+// let ctx = canvas.getContext("2d");
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+
+// let paddle = {
+//   w: 20,
+//   h: 150,
+// };
+
+// let ball = {
+//   x: canvas.width / 2,
+//   y: canvas.height / 2,
+//   vx: 5,
+//   vy: 5,
+//   r: 10,
+//   c: "white",
+// };
+
+// let player = {
+//   y: (canvas.height - paddle.h) / 2,
+//   v: 15,
+// };
+
+// let ai = {
+//   y: (canvas.height - paddle.h) / 2,
+//   v: 5,
+//   fp: 3,
+// };
+
+// let score = {
+//   p: 0,
+//   ai: 0,
+// };
+
+// let upPressed = false;
+// let downPressed = false;
+
+// const winningScore = 50;
+// let gameOver = false;
+
+// let probCheck = Math.floor(Math.random() * 100) + 1;
+
+// //Game instructions - displayed in Console
+// alert(
+//   "This is a singleplayer game. Use the 'Up' and 'Down' arrow keys to move the paddle on the left. Try to beat the bot. Every hit, the ball gains 10% speed and the paddle gains 5% speed. Beat the Ai and score 7 to win!"
+// );
+
+// // Event listeners for player paddle control
+// window.addEventListener("keydown", function (e) {
+//   if (e.keyCode == 38) upPressed = true;
+//   if (e.keyCode == 40) downPressed = true;
+// });
+
+// window.addEventListener("keyup", function (e) {
+//   if (e.keyCode == 38) upPressed = false;
+//   if (e.keyCode == 40) downPressed = false;
+// });
+
+// function drawRect(x, y, width, height, color) {
+//   ctx.fillStyle = color;
+//   ctx.fillRect(x, y, width, height);
+// }
+
+// function drawCircle(x, y, radius, color) {
+//   ctx.fillStyle = color;
+//   ctx.beginPath();
+//   ctx.arc(x, y, radius, 0, Math.PI * 2);
+//   ctx.fill();
+// }
+
+// function drawDashedLine(x, y, height, dashLength, color) {
+//   ctx.strokeStyle = color;
+//   ctx.beginPath();
+//   ctx.setLineDash([dashLength, dashLength]);
+//   ctx.moveTo(x, y);
+//   ctx.lineTo(x, y + height);
+//   ctx.stroke();
+// }
+
+// function update() {
+//   if (gameOver) return;
+
+//   // Move player paddle
+//   if (upPressed && player.y > 0) player.y -= player.v;
+//   if (downPressed && player.y < canvas.height - paddle.h) player.y += player.v;
+
+//   // Move AI paddle
+//   if (ball.y < ai.y + paddle.h / 2 && ai.y > 0) ai.y -= ai.v;
+//   if (ball.y > ai.y + paddle.h / 2 && ai.y < canvas.height - paddle.h)
+//     ai.y += ai.v;
+
+//   // Move ball
+//   ball.x += ball.vx;
+//   ball.y += ball.vy;
+
+//   // Ball collision with top and bottom
+//   if (ball.y + ball.r > canvas.height || ball.y - ball.r < 0) {
+//     ball.vy = -ball.vy;
+//   }
+
+//   // Ball collision with player paddle
+//   if (
+//     ball.x - ball.r < paddle.w &&
+//     ball.y > player.y &&
+//     ball.y < player.y + paddle.h
+//   ) {
+//     ball.vx *= -1;
+//     ball.vx *= 1.1; // Increase ball speed
+//     ball.vy *= 1.1; // Increase ball speed
+//     player.v *= 1.05; // Increase player paddle speed
+//   }
+
+//   // Ball collision with AI paddle
+//   if (
+//     ball.x + ball.r > canvas.width - paddle.w &&
+//     ball.y > ai.y &&
+//     ball.y < ai.y + paddle.h
+//   ) {
+//     ball.vx *= -1;
+//     ball.vx *= 1.05; // Increase ball speed
+//     ball.vy *= 1.05; // Increase ball speed
+//     ai.v *= 1.3; // Increase AI paddle speed
+//   }
+
+//   // Update score and reset ball if it goes out of bounds
+//   if (ball.x + ball.r > canvas.width) {
+//     score.p++;
+//     updateScoreboard();
+//     checkGameOver();
+//     resetBall();
+//   }
+//   if (ball.x - ball.r < 0) {
+//     score.ai++;
+//     updateScoreboard();
+//     checkGameOver();
+//     resetBall();
+//   }
+// }
+
+// function draw() {
+//   // Clear canvas
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//   // Draw player paddle
+//   drawRect(0, player.y, paddle.w, paddle.h, "white");
+
+//   // Draw AI paddle
+//   drawRect(canvas.width - paddle.w, ai.y, paddle.w, paddle.h, "white");
+
+//   // Draw ball
+//   drawCircle(ball.x, ball.y, ball.r, "white");
+
+//   // Draw center dashed line
+//   drawDashedLine(canvas.width / 2, 0, canvas.height, 10, "white");
+// }
+
+// function resetBall() {
+//   ball.x = canvas.width / 2;
+//   ball.y = canvas.height / 2;
+//   ball.vx = 5 * (Math.random() > 0.5 ? 1 : -1); // Random initial direction
+//   ball.vy = 5 * (Math.random() > 0.5 ? 1 : -1); // Random initial direction
+//   player.v = 15; // Reset player speed
+//   ai.v = 5; // Reset AI speed
+// }
+
+// function updateScoreboard() {
+//   document.getElementById(
+//     "scoreboard"
+//   ).innerText = `Player: ${score.p} | AI: ${score.ai}`;
+// }
+
+// function checkGameOver() {
+//   if (score.p >= winningScore) {
+//     gameOver = true;
+//     showEndScreen("Player wins!");
+//   } else if (score.ai >= winningScore) {
+//     gameOver = true;
+//     showEndScreen("AI wins!");
+//   }
+// }
+
+// function showEndScreen(message) {
+//   let endScreen = document.getElementById("end-screen");
+//   endScreen.innerText = message;
+//   endScreen.style.display = "block";
+// }
+
+// function gameLoop() {
+//   update();
+//   draw();
+//   if (!gameOver) {
+//     requestAnimationFrame(gameLoop);
+//   }
+// }
+
+// gameLoop();
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: rgb(112, 0, 232);
+}
+canvas {
+  display: block;
+}
+#scoreboard {
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+#end-screen {
+  color: white;
+  text-align: center;
+  font-size: 48px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
