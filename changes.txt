@@ -1,0 +1,6 @@
+Powerups
+Messages per miss
+Change paddle lengths
+Make a random-library.js
+Utilize arrays and function with parameters
+Make cooler
